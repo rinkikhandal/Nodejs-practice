@@ -4,13 +4,12 @@ const inputMain = document.querySelector(".main-input");
 const message = document.querySelector(".msg");
 
 window.addEventListener("DOMContentLoaded", async () => {
-  try {
-    const { data } = await axios.get("/api/v1/tasks");
-    const array = data.tasks;
-    tasks.innerHTML = array
-      .map((task) => {
-        return task.completed === true
-          ? ` <article>
+  const { data } = await axios.get("/api/v1/tasks");
+  const array = data.tasks;
+  tasks.innerHTML = array
+    .map((task) => {
+      return task.completed === true
+        ? ` <article>
                 <p class="title" style="text-decoration: line-through;">${task.name}</p>
                 <div class="icons">
                   <a href="./edit.html?id=${task._id}"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -19,7 +18,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                   </div>
                 </div>
               </article>`
-          : ` <article>
+        : ` <article>
                 <p class="title">${task.name}</p>
                 <div class="icons">
                   <a href="./edit.html?id=${task._id}"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -28,11 +27,8 @@ window.addEventListener("DOMContentLoaded", async () => {
                   </div>
               </div>
               </article>`;
-      })
-      .join("");
-  } catch (error) {
-    console.log(error.response.data.error);
-  }
+    })
+    .join("");
 });
 
 mainForm.addEventListener("submit", async (e) => {
@@ -65,7 +61,7 @@ mainForm.addEventListener("submit", async (e) => {
 
     tasks.appendChild(article);
   } catch (error) {
-    console.log(error.response.data.msg);
+    console.log(error.response.data.msg.message);
   }
 });
 

@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     Completed.checked = Boolean(mainData.completed);
   } catch (error) {
-    console.log(error.response.data.error);
+    console.log(error.response.data.msg);
   }
 });
 
@@ -43,6 +43,6 @@ EditForm.addEventListener("submit", async (e) => {
       message.classList.remove("green");
     }, 1000);
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.msg.message);
   }
 });
